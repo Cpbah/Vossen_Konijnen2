@@ -1,0 +1,20 @@
+Toevoegen:
+git add *
+
+git commit -m "commentaar"
+
+git push"
+
+
+Verwijderen:
+git rm "test.txt"     (misschien geen .txt)
+
+ls
+
+git commit -m "commentaar"
+
+git push
+
+
+Resetten:
+git reset --hard HEAD
