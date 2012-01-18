@@ -18,3 +18,7 @@ git push
 
 Resetten:
 git reset --hard HEAD
+
+
+Map refreshen:
+git pull
