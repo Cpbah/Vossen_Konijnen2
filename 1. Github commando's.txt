@@ -1,18 +1,13 @@
 Toevoegen:
 git add *
-
 git commit -m "commentaar"
-
 git push"
 
 
 Verwijderen:
-git rm "test.txt"     
-
+git rm "test.txt"
 ls
-
 git commit -m "commentaar"
-
 git push
 
 
