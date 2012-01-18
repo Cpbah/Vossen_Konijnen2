@@ -7,7 +7,7 @@ git push"
 
 
 Verwijderen:
-git rm "test.txt"     (misschien geen .txt)
+git rm "test.txt"     
 
 ls
 
