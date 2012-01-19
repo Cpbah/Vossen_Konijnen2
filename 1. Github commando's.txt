@@ -15,5 +15,5 @@ Resetten:
 git reset --hard HEAD
 
 
-Map refreshen:
+Je eigen map refreshen:
 git pull
