@@ -1,4 +1,4 @@
-package Vossen_Konijnen;
+package src.Vossen_Konijnen;
 
 import java.util.Random;
 import java.util.List;
