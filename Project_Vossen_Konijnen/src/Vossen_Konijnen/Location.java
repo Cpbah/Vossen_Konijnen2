@@ -1,4 +1,4 @@
-package src.Vossen_Konijnen;
+package Vossen_Konijnen;
 
 /**
  * Represent a location in a rectangular grid.

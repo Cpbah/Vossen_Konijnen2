@@ -1,4 +1,4 @@
-package src.Vossen_Konijnen;
+package Vossen_Konijnen;
 
 import java.util.Random;
 import java.util.List;
@@ -33,14 +33,6 @@ public class Simulator
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
-    
-    /**
-     * Main methode
-     * @param args
-     */
-    public static void main(String[] args) {
-		new Simulator();
-	}	
     
     /**
      * Construct a simulation field with default size.

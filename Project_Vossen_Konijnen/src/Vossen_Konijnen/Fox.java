@@ -1,4 +1,4 @@
-package src.Vossen_Konijnen;
+package Vossen_Konijnen;
 
 import java.util.List;
 import java.util.Iterator;
