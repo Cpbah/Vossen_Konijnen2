@@ -2,7 +2,11 @@ package Vossen_Konijnen;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
+
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -16,7 +20,7 @@ import java.util.Map;
  * @author David J. Barnes and Michael Kolling
  * @version 2008.03.30
  */
-public class SimulatorView extends JFrame
+public class SimulatorView extends JFrame implements ActionListener
 {
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
@@ -33,7 +37,14 @@ public class SimulatorView extends JFrame
     private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
+    
+    private JFrame frame;
+    private JButton eenstap;
+    private JButton honderdstap;
+    private Simulator simulator;
 
+    
+    
     /**
      * Create a view of the given width and height.
      * @param height The simulation's height.
@@ -41,24 +52,58 @@ public class SimulatorView extends JFrame
      */
     public SimulatorView(int height, int width)
     {
-        stats = new FieldStats();
+    	frame = new JFrame("Vossen en konijnen");				//
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//
+    	
+    	stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
+        
+        JPanel leftMenu = new JPanel();							//
+        leftMenu.setLayout(new GridLayout(0, 1));				//
+        
+        eenstap = new JButton("Stap 1");						//
+		leftMenu.add(eenstap);									//
+		eenstap.addActionListener(this);						//	
+		
+		honderdstap = new JButton("Stap 100");					//
+		leftMenu.add(honderdstap);								//
+		honderdstap.addActionListener(this);					//
 
-        setTitle("Fox and Rabbit Simulation");
+        //setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         
-        setLocation(100, 50);
+        //setLocation(100, 50);
+        JPanel menu = new JPanel(new BorderLayout());
+		menu.add(leftMenu, BorderLayout.NORTH);
         
         fieldView = new FieldView(height, width);
 
         Container contents = getContentPane();
+        //JPanel fieldViewLayout = new JPanel(new BorderLayout());
+        //fieldViewLayout.add(stepLabel, BorderLayout.NORTH);
+		//fieldViewLayout.add(fieldView, BorderLayout.CENTER);
+		//fieldViewLayout.add(population, BorderLayout.SOUTH);
+        contents.add(menu, BorderLayout.WEST);					//
         contents.add(stepLabel, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
-        pack();
-        setVisible(true);
+        pack();					
+        setVisible(true);			
     }
+    
+    public void actionPerformed(ActionEvent e) 
+	{
+    	 if (e.getSource() == eenstap) 
+         {   
+    		 simulator.simulateOneStep();
+         }
+    	 
+    	 if (e.getSource() == honderdstap)
+    	 {
+    		 simulator.simulate(100);
+    	 }
+	}
     
     /**
      * Define a color to be used for a given class of animal.
