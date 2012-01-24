@@ -80,10 +80,6 @@ public class SimulatorView extends JFrame implements ActionListener
         fieldView = new FieldView(height, width);
 
         Container contents = getContentPane();
-        //JPanel fieldViewLayout = new JPanel(new BorderLayout());
-        //fieldViewLayout.add(stepLabel, BorderLayout.NORTH);
-		//fieldViewLayout.add(fieldView, BorderLayout.CENTER);
-		//fieldViewLayout.add(population, BorderLayout.SOUTH);
         contents.add(menu, BorderLayout.WEST);					//
         contents.add(stepLabel, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
