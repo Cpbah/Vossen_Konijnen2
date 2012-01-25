@@ -18,7 +18,7 @@ import java.util.Map;
  * @author David J. Barnes and Michael Kolling
  * @version 2008.03.30
  */
-public class SimulatorView extends JFrame implements ActionListener
+public class SimulatorView implements ActionListener
 {
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
@@ -96,13 +96,14 @@ public class SimulatorView extends JFrame implements ActionListener
 				- frame.getHeight() / 2);
 		
         //frame.setResizable(false);
-        frame.setVisible(true);			
+        frame.setVisible(true);        
     }
     
     public void actionPerformed(ActionEvent e) 
 	{
     	 if (e.getSource() == eenstap) simulator.simulateOneStep();    	 
-    	 if (e.getSource() == honderdstap) simulator.simulate(100);    	
+    	 if (e.getSource() == honderdstap) simulator.simulate(100); 
+    	 
 	}
     
     private void makeGUIMenu(JFrame frame) 
@@ -121,6 +122,7 @@ public class SimulatorView extends JFrame implements ActionListener
 		
 		menu1.add(menuItem);
 		menubar.add(menu1);
+		
     }
     
     /**
@@ -155,8 +157,8 @@ public class SimulatorView extends JFrame implements ActionListener
      */
     public void showStatus(int step, Field field)
     {
-        if(!isVisible()) {
-            setVisible(true);
+        if(!frame.isVisible()) {
+            frame.setVisible(true);
         }
             
         stepLabel.setText(STEP_PREFIX + step);
