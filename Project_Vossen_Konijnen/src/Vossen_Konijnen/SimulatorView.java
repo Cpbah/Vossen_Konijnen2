@@ -193,6 +193,10 @@ public class SimulatorView implements ActionListener
         return stats.isViable(field);
     }
     
+    /**
+     * Setter voor Simulator
+     * @param simulator1
+     */
     public static void setSimulator(Simulator simulator1) {
 		simulator = simulator1;
 	}
