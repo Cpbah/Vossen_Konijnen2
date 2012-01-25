@@ -36,7 +36,9 @@ public class Simulator
     
     public static void main(String[] args)
     {
-    	new Simulator();
+    	//new Simulator(50, 50);
+    	Simulator simulator = new Simulator(50, 50);
+    	SimulatorView.setSimulator(simulator);
     }
     
     /**

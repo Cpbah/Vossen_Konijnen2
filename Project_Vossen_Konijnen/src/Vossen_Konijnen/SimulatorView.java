@@ -5,8 +5,6 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -41,9 +39,7 @@ public class SimulatorView extends JFrame implements ActionListener
     private JFrame frame;
     private JButton eenstap;
     private JButton honderdstap;
-    private Simulator simulator;
-
-    
+    private static Simulator simulator;  
     
     /**
      * Create a view of the given width and height.
@@ -71,35 +67,61 @@ public class SimulatorView extends JFrame implements ActionListener
 
         //setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
-        population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
-        
-        //setLocation(100, 50);
+        population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);        
+       
         JPanel menu = new JPanel(new BorderLayout());
 		menu.add(leftMenu, BorderLayout.NORTH);
+		
+		makeGUIMenu(frame);
+		
+		JPanel fieldViewLayout = new JPanel(new BorderLayout());
+		
+		//setLocation(100, 50);
+        fieldView = new FieldView(height, width); 
         
-        fieldView = new FieldView(height, width);
-
-        Container contents = getContentPane();        
-        contents.add(menu, BorderLayout.WEST);					//
-        contents.add(stepLabel, BorderLayout.NORTH);
-        contents.add(fieldView, BorderLayout.CENTER);
-        contents.add(population, BorderLayout.SOUTH);
-        pack();					
-        setVisible(true);			
+        fieldViewLayout.add(stepLabel, BorderLayout.NORTH);
+		fieldViewLayout.add(fieldView, BorderLayout.CENTER);
+		fieldViewLayout.add(population, BorderLayout.SOUTH);
+		
+        Container contents = frame.getContentPane();        
+        contents.add(menu, BorderLayout.WEST);	
+        contents.add(fieldViewLayout, BorderLayout.CENTER);
+        //contents.add(stepLabel, BorderLayout.NORTH);
+        //contents.add(fieldView, BorderLayout.CENTER);
+        //contents.add(population, BorderLayout.SOUTH);
+        frame.pack();	
+        
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(d.width / 2 - frame.getWidth() / 2, d.height / 2
+				- frame.getHeight() / 2);
+		
+        //frame.setResizable(false);
+        frame.setVisible(true);			
     }
     
     public void actionPerformed(ActionEvent e) 
 	{
-    	 if (e.getSource() == eenstap) 
-         {   
-    		 simulator.simulateOneStep();
-         }
-    	 
-    	 if (e.getSource() == honderdstap)
-    	 {
-    		 simulator.simulate(100);
-    	 }
+    	 if (e.getSource() == eenstap) simulator.simulateOneStep();    	 
+    	 if (e.getSource() == honderdstap) simulator.simulate(100);    	
 	}
+    
+    private void makeGUIMenu(JFrame frame) 
+    {
+    	JMenuBar menubar = new JMenuBar();
+    	frame.setJMenuBar(menubar);
+    	
+    	JMenu menu1 = new JMenu("File");
+    	
+    	JMenuItem menuItem = new JMenuItem("Quit");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		menu1.add(menuItem);
+		menubar.add(menu1);
+    }
     
     /**
      * Define a color to be used for a given class of animal.
@@ -168,6 +190,10 @@ public class SimulatorView extends JFrame implements ActionListener
     {
         return stats.isViable(field);
     }
+    
+    public static void setSimulator(Simulator simulator1) {
+		simulator = simulator1;
+	}
     
     /**
      * Provide a graphical view of a rectangular field. This is 
